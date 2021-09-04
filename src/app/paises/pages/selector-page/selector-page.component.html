@@ -1,8 +1,8 @@
 <h1 class="mt-5">Selectores Anidados</h1>
 <hr />
 <form [formGroup]="miFormulario" (ngSubmit)="guardar()">
+  <!-- Región -->
   <div class="row mb-5">
-    <!-- Región -->
     <div class="col">
       <label class="form-label">Continente: </label>
       <select class="form-control" formControlName="region">
@@ -11,14 +11,31 @@
       </select>
     </div>
   </div>
-  <div class="row mb-5">
-    <!-- Paises -->
+  <!-- Paises -->
+  <div class="row mb-5" *ngIf="paises.length != 0">
     <div class="col">
       <label class="form-label">País: </label>
       <select class="form-control" formControlName="pais">
         <option value="">-- Seleccione País --</option>
         <option *ngFor="let pais of paises" [value]="pais.alpha3Code">{{pais.name}}</option>
       </select>
+    </div>
+  </div>
+  <!-- Frontera -->
+  <div class="row mb-5" *ngIf="fronteras.length != 0">
+    <div class="col">
+      <label class="form-label">Frontera: </label>
+      <select class="form-control" formControlName="frontera">
+        <option value="">-- Seleccione el País fronterizo --</option>
+        <option *ngFor="let frontera of fronteras" [value]="frontera.alpha3Code">{{frontera.name}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row" *ngIf="cargando">
+    <div class="col">
+      <div class="alert alert-primary">
+        Cargando...
+      </div>
     </div>
   </div>
   <div class="row">
